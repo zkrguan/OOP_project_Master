@@ -8,6 +8,53 @@ namespace sdds {
    void Utils::testMode(bool testmode) {
       m_testMode = testmode;
    }
+   void Utils::alocpy(char*& destination, const char* source){
+      delete[] destination;
+      if (source){
+         destination = new char[strlen(source) + 1];
+         strcpy(destination, source);
+      }
+   }
+   int Utils::getInt(const char* promt){
+      int input = 0;
+      bool flag = true;
+      char tester = 'x';
+      do{
+          if (promt){
+              cout << promt << endl;
+          }
+          cout << promt << endl;
+          cin >> input, tester;
+          if (tester!='\n') {
+              cout << "Invalid Integer, retry: " << endl;
+              tester = 'x';
+              cin.ignore(1000, '\n');
+          }
+          else{
+             flag = false;
+          }
+      } while (flag);  
+      return input;
+   }
+   int Utils::getint(int min, int max, const char* prompt, const char* errMes){
+      int input = 0;
+      bool flag = true;
+      do{
+         input = getInt(prompt);
+         if (input>max||input<min){
+            if (errMes){
+               cout << errMes <<", retry: "<< endl;
+            }
+            else{
+               cout << "Value out of range" << "[" << min << "<=" << input << "<=" << max << "]" << ":" << endl;
+            }
+         }
+         else{
+            flag = false;
+         }
+      } while (flag);
+      return input;
+   }
    void Utils::getSystemDate(int* year, int* mon, int* day) {
       if (m_testMode) {
          if(day) *day = sdds_testDay;
