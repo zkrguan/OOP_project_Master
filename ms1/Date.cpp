@@ -1,3 +1,22 @@
+/* ------------------------------------------------------
+I have done all the coding by myself and
+only copied the code that my professor provided
+to complete my workshops and assignments.
+
+Project MS1
+Course title:OOP244 NBB
+Module:      Date
+Filename:    Date.cpp
+Version:     1
+student:     Zhaokai Guan
+Student Num: 130988215
+Email:       zguan25@myseneca.ca
+Date:        March 10th 2022
+
+Revision History
+-----------------------------------------------------------
+Date:   Reason:
+-----------------------------------------------------------*/
 #include <iostream>
 #include <stdlib.h>
 #include <cstring>
@@ -41,8 +60,6 @@ namespace sdds {
       m_day = day;
       validate();
    }
-
-
 
    bool Date::operator==(const Date& cmpTo) const{
       return this->uniqueDateVal() == cmpTo.uniqueDateVal();
@@ -112,7 +129,7 @@ namespace sdds {
       char inputSecondPart[3]{};
       int counter = 0;
       istr.get(inputFirstPart, 5);
-      for ( int i = 0; i < strlen(inputFirstPart); i++){
+      for ( unsigned i = 0; i < strlen(inputFirstPart); i++){
          counter += isalpha(inputFirstPart[i]);
       }
       if (counter != 0) {

@@ -1,4 +1,24 @@
-#ifndef SSDS_DATE_H
+/* ------------------------------------------------------
+I have done all the coding by myself and
+only copied the code that my professor provided
+to complete my workshops and assignments.
+
+Project MS1
+Course title:OOP244 NBB
+Module:      Date
+Filename:    Date.h
+Version:     1
+student:     Zhaokai Guan
+Student Num: 130988215
+Email:       zguan25@myseneca.ca
+Date:        March 10th 2022
+
+Revision History
+-----------------------------------------------------------
+Date:   Reason:
+-----------------------------------------------------------*/
+
+#ifndef SDDS_DATE_H
 #define SDDS_DATE_H
 #include <iostream>
 #include "Status.h"
@@ -22,7 +42,6 @@ namespace sdds {
    bool operator > (const Date& cmpTo) const;
    bool operator <= (const Date& cmpTo) const;
    bool operator >= (const Date& cmpTo) const;
-
    const Status& state();
    Date& formatted(bool format);
    operator bool()const;
@@ -32,4 +51,4 @@ namespace sdds {
    std::ostream& operator <<(std::ostream& ostr, const Date& srcVarible);
    std::istream& operator >>(std::istream& istr, Date& desVarible);
 }
-#endif // !SSDS_DATE_H
+#endif // !SDDS_DATE_H

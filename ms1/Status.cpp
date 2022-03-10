@@ -1,3 +1,22 @@
+/* ------------------------------------------------------
+I have done all the coding by myself and
+only copied the code that my professor provided
+to complete my workshops and assignments.
+
+Project MS1
+Course title:OOP244 NBB
+Module:      Status
+Filename:    Status.cpp
+Version:     1
+student:     Zhaokai Guan
+Student Num: 130988215
+Email:       zguan25@myseneca.ca
+Date:        March 10th 2022
+
+Revision History
+-----------------------------------------------------------
+Date:   Reason:
+-----------------------------------------------------------*/
 #include <iostream>
 #include "Utils.h"
 #include "Status.h"
@@ -60,7 +79,7 @@ namespace sdds {
    std::ostream& operator<<(std::ostream& ostr, const Status& source){
       if (!source){
          if (int(source)){
-            ostr << "ERR#" << int(source) << ":" << (const char*)(source);
+            ostr << "ERR#" << int(source) << ": " << (const char*)(source);
          }
          else{
             ostr << (const char*)(source);

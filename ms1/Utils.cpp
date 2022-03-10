@@ -1,5 +1,26 @@
+/* ------------------------------------------------------
+I have done all the coding by myself and
+only copied the code that my professor provided
+to complete my workshops and assignments.
+
+Project MS1
+Course title:OOP244 NBB
+Module:      Utils
+Filename:    Utils.cpp
+Version:     1
+student:     Zhaokai Guan
+Student Num: 130988215
+Email:       zguan25@myseneca.ca
+Date:        March 10th 2022
+
+Revision History
+-----------------------------------------------------------
+Date:   Reason:
+-----------------------------------------------------------*/
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <cstring>
 #include <ctime>
 #include "Utils.h"
 using namespace std;
@@ -24,7 +45,7 @@ namespace sdds {
               cout << promt << endl;
           }
           cout << promt << endl;
-          cin >> input, tester;
+          cin >> input >> tester;
           if (tester!='\n') {
               cout << "Invalid Integer, retry: " << endl;
               tester = 'x';
