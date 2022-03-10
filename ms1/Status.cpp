@@ -59,8 +59,11 @@ namespace sdds {
    
    std::ostream& operator<<(std::ostream& ostr, const Status& source){
       if (!source){
-         if (!int(source)){
+         if (int(source)){
             ostr << "ERR#" << int(source) << ":" << (const char*)(source);
+         }
+         else{
+            ostr << (const char*)(source);
          }
       }
       return ostr;

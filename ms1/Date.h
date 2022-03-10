@@ -9,14 +9,13 @@ namespace sdds {
       int m_month{};
       int m_day{};
       Status m_state{};
-      bool m_formatted;
+      bool m_formatted = true;
       // private method // 
       int uniqueDateVal() const;
    public:
    bool validate();
    Date();
    Date(int year, int month, int day);
-   
    bool operator == (const Date& cmpTo) const;
    bool operator != (const Date& cmpTo) const;
    bool operator < (const Date& cmpTo) const;
@@ -27,10 +26,10 @@ namespace sdds {
    const Status& state();
    Date& formatted(bool format);
    operator bool()const;
-   std::ostream& write(std::ostream& ostr);
+   std::ostream& write(std::ostream& ostr)const;
    std::istream& read(std::istream& istr);
    };
-   std::ostream& operator <<(std::ostream& ostr, Date& srcVarible);
+   std::ostream& operator <<(std::ostream& ostr, const Date& srcVarible);
    std::istream& operator >>(std::istream& istr, Date& desVarible);
 }
 #endif // !SSDS_DATE_H

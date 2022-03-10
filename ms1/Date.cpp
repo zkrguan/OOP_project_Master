@@ -4,6 +4,7 @@
 #include "Date.h"
 #include "Utils.h"
 
+
 namespace sdds {
    int Date::uniqueDateVal() const{
       return m_year*372 + m_month*31+m_day;
@@ -41,6 +42,8 @@ namespace sdds {
       validate();
    }
 
+
+
    bool Date::operator==(const Date& cmpTo) const{
       return this->uniqueDateVal() == cmpTo.uniqueDateVal();
    }
@@ -66,7 +69,7 @@ namespace sdds {
    }
 
    const Status& Date::state(){
-      return this->m_state;
+      return m_state;
    }
 
    Date& Date::formatted(bool format){
@@ -75,11 +78,10 @@ namespace sdds {
    }
 
    Date::operator bool() const{
-      return m_state;
+      return (bool)(m_state);
    }
 
-   std::ostream& Date::write(std::ostream& ostr){
-      if (validate()){
+   std::ostream& Date::write(std::ostream& ostr)const{
          if (m_formatted) {
             ostr << m_year << "/";
             ostr.width(2);
@@ -98,37 +100,49 @@ namespace sdds {
             ostr.width(2);
             ostr.fill('0');
             ostr << m_day;
+         
          }
-      }
       return ostr;
    }
 
    std::istream& Date::read(std::istream& istr){
       // Had a perfect way by treating input as int, until I see the main code has a flush buffer//
+      m_state.clear();
       char inputFirstPart[5]{};
       char inputSecondPart[3]{};
-      char formatChecker{};
-      istr.get(inputFirstPart, 4);
-      if (istr.peek()!='\n'){
-         istr.get(inputSecondPart, 2);
-         m_year = atoi(inputFirstPart) / 100;
-         m_month = atoi(inputFirstPart) - m_year;
-         m_day = atoi(inputSecondPart);
+      int counter = 0;
+      istr.get(inputFirstPart, 5);
+      for ( int i = 0; i < strlen(inputFirstPart); i++){
+         counter += isalpha(inputFirstPart[i]);
       }
-      else{
-         m_month = atoi(inputFirstPart) / 100;
-         m_day = atoi(inputFirstPart) - m_month;
-      }
-      if (!validate()){
+      if (counter != 0) {
          istr.setstate(std::ios::failbit);
+         m_state = "Invalid date value";
+      }
+      else {
+         if (istr.peek() != '\n') {
+            istr.get(inputSecondPart, 3);
+            m_year = atoi(inputFirstPart) / 100;
+            m_month = atoi(inputFirstPart) - m_year * 100;
+            m_day = atoi(inputSecondPart);
+            m_year += 2000;
+         }
+         else {
+            m_month = atoi(inputFirstPart) / 100;
+            m_day = atoi(inputFirstPart) - m_month * 100;
+            m_year = 2022;
+         } 
+         if (!validate()) {
+            istr.setstate(std::ios::failbit);
+         }
+         else {
+            istr.ignore(1000, '\n');
+         }
       }
       return istr;
    }
-   
-
-
-
-   std::ostream& operator<<(std::ostream& ostr, Date& srcVarible){
+  
+   std::ostream& operator<<(std::ostream& ostr, const Date& srcVarible){
       return srcVarible.write(ostr);
    }
 
