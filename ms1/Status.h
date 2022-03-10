@@ -9,6 +9,8 @@ namespace sdds {
 		Status(const Status& srcVarible);
 		Status& operator = (const Status& srcVarible);
 		Status& operator = (const int srcValue);
+		// student defined overloading to make the process easier // 
+		Status& operator= (const char* srcStr);
 		~Status();
 		operator int()const;
 		operator const char* ()const;

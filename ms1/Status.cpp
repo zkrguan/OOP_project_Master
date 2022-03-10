@@ -19,16 +19,21 @@ namespace sdds {
    }
    
    Status& Status::operator=(const Status& srcVarible){
-      delete[] m_description;
-      ut.alocpy(m_description, srcVarible.m_description);
-      return *this;
+      return *this = srcVarible.m_description;
    }
+
    
    Status& Status::operator=(const int srcValue){
       m_statusCode = srcValue;
       return *this;
    }
    
+   Status& Status::operator=(const char* srcStr){
+      delete[] m_description;
+      ut.alocpy(m_description, srcStr);
+      return *this;
+   }
+
    Status::~Status(){
       delete[] m_description;
    }
