@@ -29,6 +29,7 @@ namespace sdds {
    void Utils::testMode(bool testmode) {
       m_testMode = testmode;
    }
+
    void Utils::alocpy(char*& destination, const char* source) {
       delete[] destination;
       if (source) {
@@ -36,8 +37,10 @@ namespace sdds {
          strcpy(destination, source);
       }
    }
+
    int Utils::getInt(const char* promt) {
       //upgrade the getInt Function Mar10th//
+      // convinient to use and concise code//
       int input = 0;
       bool flag = true;
       do {
@@ -55,6 +58,7 @@ namespace sdds {
       } while (flag);
       return input;
    }
+
    int Utils::getint(int min, int max, const char* prompt, const char* errMes) {
       int input = 0;
       bool flag = true;
@@ -74,6 +78,7 @@ namespace sdds {
       } while (flag);
       return input;
    }
+
    void Utils::getSystemDate(int* year, int* mon, int* day) {
       if (m_testMode) {
          if (day) *day = sdds_testDay;
@@ -88,6 +93,7 @@ namespace sdds {
          if (year) *year = lt.tm_year + 1900;
       }
    }
+
    int Utils::daysOfMon(int month, int year)const {
       int days[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, -1 };
       int mon = (month >= 1 && month <= 12 ? month : 13) - 1;

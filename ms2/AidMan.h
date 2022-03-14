@@ -25,10 +25,10 @@ namespace sdds {
 		char* m_fileName{};
 		menu m_mainMenu{};
 		//Private method//
-		unsigned menus();
+		unsigned menus() const;
 	public:
 		AidMan();
-		AidMan(AidMan& src) = delete;
+		AidMan(const AidMan& src) = delete;
 		~AidMan();
 		AidMan& operator = (const AidMan& src) = delete;
 		void run();

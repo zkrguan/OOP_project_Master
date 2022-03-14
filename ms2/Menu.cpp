@@ -27,6 +27,7 @@ namespace sdds {
 		m_options = nullptr;
 		m_numOfOptions = 0;
 	}
+
 	menu::menu(unsigned num, const char* cString){
 		if (num>15||!cString){
 			m_numOfOptions = 0;

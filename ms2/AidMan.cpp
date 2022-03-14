@@ -18,13 +18,14 @@ Revision History
 Date:   Reason:
 -----------------------------------------------------------*/
 #include<iostream>
-#include<cstring>
 #include"AidMan.h"
 #include"Date.h"
 namespace sdds {
-	unsigned AidMan::menus(){
+	unsigned AidMan::menus() const{
 		unsigned option = 0;
 		std::cout << "Aid Management System Version 0.1" << std::endl;
+		// Used prof's calling constructor to get a temp project to print out the system time//
+		// discard it right after used, so good//
 		std::cout << "Date: "<<Date() << std::endl;
 		std::cout << "Data file: ";
 		if (m_fileName){
@@ -37,14 +38,18 @@ namespace sdds {
 		option = m_mainMenu.run();
 		return option;
 	}
+
 	AidMan::AidMan(){
 		const char menuContent[] =
 			"1- List Items\n2- Add Item\n3- Remove Item\n4- Update Quantity\n5- Sort\n6- Ship Items\n7- New/Open Aid Database\n---------------------------------\n0- Exit\n";
 		m_mainMenu.set(menuContent, 7);
+		// m_filename is initialized as nullptr in the headerfile while defining the class//
 	}
+
 	AidMan::~AidMan(){
 		delete[] m_fileName;
 	}
+
 	void AidMan::run(){
 		int userSelection = 0;
 		do{
@@ -75,8 +80,7 @@ namespace sdds {
 		  default:
 			  break;
 		  }
-		
-		} while (userSelection!=0);
+		} while (userSelection);
 		std::cout << "Exiting Program!" << std::endl;
 	}
 }
