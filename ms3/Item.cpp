@@ -113,26 +113,20 @@ namespace sdds {
          if (m_flag){
             ostr.width(5);
             ostr << m_SKU << " | ";
-            bool flag = true;
-            for (int i = 0; i < 35; i++) {
-               if (m_desc[i] && flag) {
-                  ostr << m_desc[i];
-               }
-               else{
-                  flag = false;
-                  ostr << ' ';
-               }
-            }
+            // For loop inherited from Fardad coding style, so concise//
+            // strlen will return a unsigned, learned it from a hard way//
+            for (unsigned i = 0; i < 35; i++) 
+               ostr << ((i < strlen(m_desc) ? m_desc[i] : ' '));
             ostr << " | ";
             ostr.setf(std::ios::right);
             ostr.width(4);
             ostr << m_onHand<<" | ";
-            ostr.width(6);
+            ostr.width(4);
             ostr << m_inNeed<<" | ";
-            ostr.width(6);
+            ostr.width(7);
             ostr.setf(std::ios::fixed);
             ostr.precision(2);
-            ostr << m_price;
+            ostr << m_price << " |";
             ostr.unsetf(std::ios::right);
             ostr.unsetf(std::ios::fixed);
          }

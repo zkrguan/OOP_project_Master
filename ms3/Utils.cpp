@@ -84,7 +84,7 @@ namespace sdds {
       do {
         
          if (!(cin >> input)) {
-            cout << "Invalid Integer, retry: ";
+            cout << "Invalid number retry: ";
             cin.clear();
             cin.ignore(1000, '\n');
          }
