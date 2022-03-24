@@ -3,7 +3,7 @@ I have done all the coding by myself and
 only copied the code that my professor provided
 to complete my workshops and assignments.
 
-Project MS1
+Project MS3
 Course title:OOP244 NBB
 Module:      Utils
 Filename:    Utils.h
@@ -34,6 +34,9 @@ namespace sdds {
       void alocpy(char*& destination, const char* source);
       int getInt(const char* promt = nullptr);
       int getint(int min, int max, const char* prompt = nullptr, const char* errMes = nullptr);
+      double getDouble(const char* prompt = nullptr);
+      double getDoubleAvecRange(double min, double max, const char* prompt = nullptr, const char* errMes = nullptr);
+
    };
    extern Utils ut;
 }
