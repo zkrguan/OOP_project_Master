@@ -3,7 +3,7 @@ I have done all the coding by myself and
 only copied the code that my professor provided
 to complete my workshops and assignments.
 
-Project MS3
+Project MS4
 Course title:OOP244 NBB
 Module:      Utils
 Filename:    Utils.cpp
@@ -11,13 +11,12 @@ Version:     1
 student:     Zhaokai Guan
 Student Num: 130988215
 Email:       zguan25@myseneca.ca
-Date:        March 24th 2022
+Date:        March 31th 2022
 
 Revision History
 -----------------------------------------------------------
 Date:   Reason:
 -----------------------------------------------------------*/
-
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstring>

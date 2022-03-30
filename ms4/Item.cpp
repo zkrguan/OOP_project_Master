@@ -3,7 +3,7 @@ I have done all the coding by myself and
 only copied the code that my professor provided
 to complete my workshops and assignments.
 
-Project MS3
+Project MS4
 Course title:OOP244 NBB
 Module:      Item
 Filename:    Item.h
@@ -11,7 +11,7 @@ Version:     1
 student:     Zhaokai Guan
 Student Num: 130988215
 Email:       zguan25@myseneca.ca
-Date:        March 24th 2022
+Date:        March 31th 2022
 
 Revision History
 -----------------------------------------------------------
@@ -34,13 +34,13 @@ namespace sdds {
 
    Item& Item::operator=(const Item& src){
       if (this!=&src){
-         delete[] m_desc;
          ut.alocpy(m_desc, src.m_desc);
          m_price = src.m_price;
          m_onHand = src.m_onHand;
          m_inNeed = src.m_inNeed;
          m_flag = src.m_flag;
          m_stateOfItem = src.m_stateOfItem;
+         m_SKU = src.m_SKU;
       }
       return *this;
    }
@@ -97,7 +97,7 @@ namespace sdds {
    std::ofstream& Item::save(std::ofstream& ofstr) const{
       
       if (bool(m_stateOfItem)){
-         ofstr << m_SKU << "\t" << m_desc << "\t" << m_onHand << "\t" << m_inNeed<< "\t" << m_price << "\n";
+         ofstr << m_SKU << "\t" << m_desc << "\t" << m_onHand << "\t" << m_inNeed<< "\t" << m_price;
       }     
       return ofstr;
    }
@@ -139,6 +139,7 @@ namespace sdds {
                ostr << ((i < strlen(m_desc) ? m_desc[i] : ' '));
             ostr << " | ";
             ostr.setf(std::ios::right);
+            ostr.fill(' ');
             ostr.width(4);
             ostr << m_onHand<<" | ";
             ostr.width(4);
@@ -173,11 +174,10 @@ namespace sdds {
       // taking desc//
       istr.ignore();
       if (istr.getline(tempDesc, 199)) {
-         delete[] m_desc;
          ut.alocpy(m_desc, tempDesc);
          m_inNeed = ut.getint(1, 9999, "Quantity Needed: ");
          m_onHand = ut.getint(0, m_inNeed, "Quantity On Hand: ");
-         m_price = ut.getDoubleAvecRange(0.0, 9999.0, "Unit Price: ");
+         m_price = ut.getDoubleAvecRange(0.0, 9999.0, "Unit Price: $");
       }
       else{
          m_stateOfItem = "Console entry failed!";
