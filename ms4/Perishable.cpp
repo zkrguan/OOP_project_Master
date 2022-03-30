@@ -60,10 +60,8 @@ namespace sdds {
       if (bool(m_stateOfItem)) {
          Item::save(ofstr);
          ofstr << "\t";
-         if (m_instruct && strlen(m_instruct)) {
-            ofstr << m_instruct;
-            
-         }
+         if (m_instruct && strlen(m_instruct))
+            ofstr << m_instruct; 
          ofstr << "\t";
          ofstr << Date(m_expiryDate).formatted(false)<<'\t';
       }
@@ -82,11 +80,9 @@ namespace sdds {
          ifstr.clear();
          ifstr.ignore();
       }
-
       m_expiryDate.read(ifstr);
-      if(!ifstr){
-         m_stateOfItem = "Input file stream read (perishable) failed!";
-      }
+      if(!ifstr)
+         m_stateOfItem = "Input file stream read (perishable) failed!";     
       return ifstr;
    }
 
@@ -107,9 +103,8 @@ namespace sdds {
             ostr << "\n";
          }
       }
-      else{
+      else
          ostr << m_stateOfItem;
-      }
       return ostr;
    }
 
@@ -127,9 +122,8 @@ namespace sdds {
          ut.alocpy(m_instruct, tempInst);
       }
       istr.ignore();
-      if (!istr){
+      if (!istr)
          m_stateOfItem = "Perishable console date entry failed!";
-      }
       return istr;
    }
 

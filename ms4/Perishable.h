@@ -43,7 +43,5 @@ namespace sdds {
       virtual std::ostream& display(std::ostream& ostr)const;
       virtual std::istream& read(std::istream& istr);
    };
-
-
 }
 #endif // !SDDS_PERISHABLE
