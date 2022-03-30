@@ -3,7 +3,7 @@ I have done all the coding by myself and
 only copied the code that my professor provided
 to complete my workshops and assignments.
 
-Project MS2
+Project MS3
 Course title:OOP244 NBB
 Module:      Utils
 Filename:    Utils.cpp
@@ -11,7 +11,7 @@ Version:     1
 student:     Zhaokai Guan
 Student Num: 130988215
 Email:       zguan25@myseneca.ca
-Date:        March 10th 2022
+Date:        March 24th 2022
 
 Revision History
 -----------------------------------------------------------
@@ -84,7 +84,7 @@ namespace sdds {
       do {
         
          if (!(cin >> input)) {
-            cout << "Invalid number retry: ";
+            cout << "Invalid number, retry: ";
             cin.clear();
             cin.ignore(1000, '\n');
          }
