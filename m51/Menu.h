@@ -5,8 +5,8 @@ to complete my workshops and assignments.
 
 Project MS2
 Course title:OOP244 NBB
-Module:      AidMan
-Filename:    AidMan.h
+Module:      Menu
+Filename:    Menu.h
 Version:     1
 student:     Zhaokai Guan
 Student Num: 130988215
@@ -17,22 +17,21 @@ Revision History
 -----------------------------------------------------------
 Date:   Reason:
 -----------------------------------------------------------*/
-#ifndef SDDS_AIDMAN_H
-#define SDDS_AIDMAN_H
-#include "Menu.h"
+#ifndef SDDS_MENU_H
+#define SDDS_MENU_H
 namespace sdds {
-	class AidMan {
-		char* m_fileName{};
-		menu m_mainMenu{};
-		//Private method//
-		unsigned menus() const;
+	class menu {
+		char* m_options{};
+		unsigned m_numOfOptions{};
 	public:
-		AidMan();
-		AidMan(const AidMan& src) = delete;
-		~AidMan();
-		AidMan& operator = (const AidMan& src) = delete;
-		void run();
+		menu();
+		menu(unsigned num,const char* cString);
+		menu(const menu& incoming) = delete;
+		menu& operator = (const menu& incoming) = delete;
+		//student defined function//
+		void set(const char* srcString, unsigned numOptions);
+		~menu();
+		unsigned run()const;
 	};
-	extern const int sdds_max_num_items;
 }
-#endif // !SDDS_AIDMAN_H
+#endif // !SDDS_MENU_H
