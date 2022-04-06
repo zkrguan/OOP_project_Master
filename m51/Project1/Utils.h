@@ -33,6 +33,7 @@ namespace sdds {
       // Student Codes start Here//
       void alocpy(char*& destination, const char* source);
       int getInt(const char* promt = nullptr);
+      int getRowNum(int min, int max);
       int getint(int min, int max, const char* prompt = nullptr, const char* errMes = nullptr);
       double getDouble(const char* prompt = nullptr);
       double getDoubleAvecRange(double min, double max, const char* prompt = nullptr, const char* errMes = nullptr);

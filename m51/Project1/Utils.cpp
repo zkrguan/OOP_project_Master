@@ -19,6 +19,8 @@ Date:   Reason:
 -----------------------------------------------------------*/
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <string>
+#include <ctype.h>
 #include <cstring>
 #include <ctime>
 #include "Utils.h"
@@ -53,6 +55,39 @@ namespace sdds {
          }
       } while (flag);
       return input;
+   }
+
+   int Utils::getRowNum(int min,int max) {
+      char input{};
+      int convertedInput = -5;
+      bool flag = false;
+      do {
+         cin.ignore();
+         input = getchar();
+         if (isdigit(input)) {
+            // if the input is a digit char, use input's asiic code to minus the 0's asiic code//
+            // will get the actual int value of the input// 
+            convertedInput = input - '0';
+            if (convertedInput< min || convertedInput>max){
+               cout << "Value out of range " << "[" << min << "<=" << "val" << "<=" << max << "]" << ": ";
+               flag = true;
+            }
+            else{
+               flag = false;
+            }
+         }
+         else if (input=='\n') {
+            // -10 is the exit flag for the menu option1//
+            convertedInput = -10;
+         } 
+         else{
+            cout << "Invalid Entry, retry: ";
+            flag = true;
+            cin.clear();
+            cin.ignore(1000, '\n');
+         }
+      } while (flag);
+      return convertedInput;
    }
 
    int Utils::getint(int min, int max, const char* prompt, const char* errMes) {

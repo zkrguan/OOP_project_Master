@@ -49,6 +49,7 @@ namespace sdds {
       delete[] m_desc;
    }
 
+
    int Item::qtyNeeded() const{
       return m_inNeed;
    }
@@ -62,7 +63,7 @@ namespace sdds {
    }
 
    Item::operator bool() const{
-      return m_flag;
+      return m_stateOfItem;
    }
 
    int Item::operator-=(int deductVal){
@@ -95,7 +96,6 @@ namespace sdds {
    }
 
    std::ofstream& Item::save(std::ofstream& ofstr) const{
-      
       if (bool(m_stateOfItem)){
          ofstr << m_SKU << "\t" << m_desc << "\t" << m_onHand << "\t" << m_inNeed<< "\t" << m_price;
       }     

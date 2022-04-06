@@ -20,12 +20,21 @@ Date:   Reason:
 #ifndef SDDS_AIDMAN_H
 #define SDDS_AIDMAN_H
 #include "Menu.h"
+#include "iProduct.h"
 namespace sdds {
+	extern const int sdds_max_num_items = 100;
 	class AidMan {
 		char* m_fileName{};
 		menu m_mainMenu{};
+		iProduct* m_ptrArr [sdds_max_num_items]{};
+		// tracker can not go above than 100//
+		int m_tracker{};
 		//Private method//
 		unsigned menus() const;
+		void save();
+		bool load();
+		void deallocate();
+
 	public:
 		AidMan();
 		AidMan(const AidMan& src) = delete;
@@ -33,6 +42,6 @@ namespace sdds {
 		AidMan& operator = (const AidMan& src) = delete;
 		void run();
 	};
-	extern const int sdds_max_num_items;
+	// created a global just in case the other module needs this//
 }
 #endif // !SDDS_AIDMAN_H

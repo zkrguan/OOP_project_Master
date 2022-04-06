@@ -125,6 +125,7 @@ namespace sdds {
 
 	void AidMan::run(){
 		int userSelection = 0;
+		char tempName[50]{};
 		do{
 		  userSelection = menus();
 		  if (!m_fileName&&userSelection !=7&&userSelection){
@@ -154,8 +155,7 @@ namespace sdds {
 			  std::cout << "\n****" << "New/Open Aid Database" << "****\n" << std::endl;
 		  	  // prompt to get the filename//
 			  std::cout << "Enter file name:" << std::endl;
-			  char tempName[50]{};
-			  std::cin.getline(tempName,49);
+			  std::cin.getline(tempName,49,'\n');
 			  ut.alocpy(m_fileName, tempName);
 			  // deallocate memory//
 			  // load all the records//
