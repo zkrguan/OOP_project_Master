@@ -3,7 +3,7 @@ I have done all the coding by myself and
 only copied the code that my professor provided
 to complete my workshops and assignments.
 
-Project MS4
+Project MS5
 Course title:OOP244 NBB
 Module:      Perishable
 Filename:    Perishable.h
@@ -11,7 +11,7 @@ Version:     1
 student:     Zhaokai Guan
 Student Num: 130988215
 Email:       zguan25@myseneca.ca
-Date:        March 31th 2022
+Date:        April 09th 2022
 
 Revision History
 -----------------------------------------------------------
@@ -116,13 +116,17 @@ namespace sdds {
       std::cout << "Expiry date (YYMMDD): ";
       m_expiryDate.read(istr);
       std::cout << "Handling Instructions, ENTER to skip: ";
-      if (istr.peek() != '\n'){
+      // this is the static char array reading//
+      /* if (istr.peek() != '\n'){
          char tempInst[101]{};
          istr.get(tempInst, 100, '\n');
          ut.alocpy(m_instruct, tempInst);
-      }
-      istr.ignore();
-      if (!istr)
+      }*/
+      
+      // I perform the dynamic reading //
+      // just for getting the BONUS MARK//
+      // please take a look at this function in my utils//
+      if (!ut.dynamicReadStr(m_instruct,istr))
          m_stateOfItem = "Perishable console date entry failed!";
       return istr;
    }

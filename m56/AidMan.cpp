@@ -3,15 +3,15 @@ I have done all the coding by myself and
 only copied the code that my professor provided
 to complete my workshops and assignments.
 
-Project MS2
+Project MS5
 Course title:OOP244 NBB
 Module:      AidMan
-Filename:    AidMan.h
+Filename:    AidMan.cpp
 Version:     1
 student:     Zhaokai Guan
 Student Num: 130988215
 Email:       zguan25@myseneca.ca
-Date:        March 10th 2022
+Date:        April 9th 2022
 
 Revision History
 -----------------------------------------------------------
@@ -51,9 +51,8 @@ namespace sdds {
 			std::ofstream saveIn;
 			saveIn.open(m_fileName,std::ios::out);
 			for (int i = 0; i < m_tracker; i++){
-				if (m_ptrArr[i]) {
+				if (m_ptrArr[i]) 
 					m_ptrArr[i]->save(saveIn)<<"\n";
-				}
 			}
 			saveIn.close();
 		}
@@ -68,14 +67,16 @@ namespace sdds {
 		std::ifstream read;
 		read.open(m_fileName, std::ios::in);
 		if (read){
+			// eof?//
 			for (int i = 0; i < sdds_max_num_items; i++){
 				read.clear();
+				// use char to peek the first char of each line//
 				char firstC = 0;
 				firstC = read.peek();
+				// allocating the arr element by the comparing asiic num actually// 
 				if (int(firstC) >= '1' && int(firstC) <= '3') {
 					m_ptrArr[i] = new Perishable;
 				}
-				// comparing asiic num actually// 
 				else if (int(firstC) >='4' && int(firstC) <='9'){
 					m_ptrArr[i] = new Item;
 				}
@@ -87,10 +88,7 @@ namespace sdds {
 				if (read) {
 					// call the load method of the items to load it into the file
 					m_ptrArr[i]->load(read);
-					// the loaded item is checked to be in a good state,
-					// if true, number of iProduct Items is added by one, 
-					// if false the loaded item is deleted.
-					// can be simplified // 
+					// the loaded item is checked to be in a good state,				
 					if (bool(*m_ptrArr[i])){
 						m_tracker++;
 					}
@@ -122,6 +120,8 @@ namespace sdds {
 	void AidMan::deallocate(){
 		for (int i = 0; i <sdds_max_num_items; i++){
 			delete m_ptrArr [i];
+			// set it to nullptr is important at here 
+			// Because the remove function design
 			m_ptrArr[i] = nullptr;
 		}
 		m_tracker = 0;
@@ -157,7 +157,7 @@ namespace sdds {
 				  // -10 means user entered \n as the entry for the row num//
 				  if (RowNum!=-10){
 					  m_ptrArr[RowNum-1]->linear(false);
-					  m_ptrArr[RowNum-1]->display(std::cout)<<std::endl;
+					  std::cout << m_ptrArr[RowNum - 1] << std::endl;
 				  }
 			  }
 			  break;
@@ -166,21 +166,22 @@ namespace sdds {
 			  addItem();
 			  break;
 		  case 3:
-			  // TD: Could be simplified 
-			  // additional function should be set.
-			  //
-			  std::cout << "\n****" << "Remove Item" << "****\n" << std::endl;
-			  std::cout << "Item description: " << std::endl;
+			  std::cout << "\n****" << "Remove Item" << "****\n";
+			  std::cout << "Item description: ";
 			  if (seachByStr()) {
 				  int tempSKU = 0;
 				  int index = -2;
-				  std::cout << "Enter SKU: " << std::endl;
+				  std::cout << "Enter SKU: ";
 				  std::cin >> tempSKU;
 				  index = search(tempSKU);
 				  if (index > -1){
-					  int userConf = ut.getint(0, 1, "Are you sure?\n1- Yes!\n0- Exit\n>");
+					  std::cout << "Following item will be removed: " << std::endl;
+					  m_ptrArr[index]->linear(false);
+					  m_ptrArr[index]->display(std::cout)<<"\n";
+					  int userConf = ut.getint(0, 1, "Are you sure?\n1- Yes!\n0- Exit\n> ");
 					  if (userConf){
 						  remove(index);
+						  std::cout << "Item removed!\n" << std::endl;
 					  }
 					  else{
 						  std::cout << "Aborted!\n";
@@ -193,34 +194,35 @@ namespace sdds {
 			  else{
 				  std::cout << "Can't find the item with the input information, please use option 1 to see all the inventory" << std::endl;
 			  }
-			  
 			  break;
 		  case 4:
-			  std::cout << "\n****" << "Update Quantity" << "****\n" << std::endl;
-			  std::cout << "Item description: " << std::endl;
+			  std::cout << "\n****" << "Update Quantity" << "****\n";
+			  std::cout << "Item description: ";
 			  if (seachByStr()) {
 				  int tempSKU = 0;
 				  int index = -2;
-				  std::cout << "Enter SKU: " << std::endl;
+				  std::cout << "Enter SKU: ";
 				  std::cin >> tempSKU;
 				  index = search(tempSKU);
 				  if (index > -1){
 					  updateQuantity(index);
 				  }
+				  else {
+					  std::cout << "SKU can not be found!\n";
+				  }
 			  }
 			  else{
 				  std::cout << "No Matches can be found\n";
 			  }
-
 			  break;
 		  case 5:
-			  std::cout << "\n****" << "Sort" << "****\n" << std::endl;
+			  std::cout << "\n****" << "Sort" << "****\n";
 			  sort();
 			  break;
-			  //intentionally added scope for case 6 in order to declare a ofstr variable inside//
+		  //intentionally added scope for case 6 in order to declare a ofstr variable inside//
 		  case 6: {
-			  int counter = 0;
-				std::cout << "\n****" << "Ship Items" << "****\n" << std::endl;
+			   int counter = 0;
+				std::cout << "\n****" << "Ship Items" << "****" << std::endl;
 				std::ofstream shipping("shippingOrder.txt", std::ios::out); 
 				shipping << "Shipping Order, Date: " << Date() << "\n";
 				shipping << " ROW |  SKU  | Description                         | Have | Need |  Price  | Expiry\n";
@@ -243,10 +245,8 @@ namespace sdds {
 				}
 				shipping << "-----+-------+-------------------------------------+------+------+---------+-----------\n";
 				shipping.close();
-				std::cout << "Shipping order for " << counter << " times saved!";
-			}
-			  
-
+				std::cout << "Shipping Order for " << counter << " times saved!\n"<<std::endl;
+				}
 			  break;
 		  case 7:
 			  std::cout << "\n****" << "New/Open Aid Database" << "****" << std::endl;
@@ -255,8 +255,6 @@ namespace sdds {
 			  std::cin.ignore(1000, '\n');
 			  std::cin.get(tempName,49,'\n');
 			  ut.alocpy(m_fileName, tempName);
-			  // deallocate memory//
-			  // load all the records//
 			  load();
 			  break;
 		  default:
@@ -302,10 +300,8 @@ namespace sdds {
 	int AidMan::search(int sku) const{
 		int index = -1;
 		for (int i = 0; i < m_tracker&&(index==-1); i++) {
-			// TD simplify this//
-			if (*m_ptrArr[i] == sku) {
+			if (*m_ptrArr[i] == sku) 
 				index = i;
-			}
 		}
 		return index;
 	}
@@ -358,7 +354,6 @@ namespace sdds {
 		bool flag = false;
 		delete m_ptrArr[index];
 		for (int i = index; i < m_tracker; i++){
-			//TD:: for sure there will be memory leak// 
 			m_ptrArr[i] = m_ptrArr[i + 1];
 			flag = true;
 		}
@@ -367,7 +362,6 @@ namespace sdds {
 		}
 	}
 	bool AidMan::seachByStr(){
-		// TD : make the table shows when there is data avalible//
 		bool flag = false;
 		std::string tempStrDesc;
 		std::cin >> tempStrDesc;
@@ -401,7 +395,7 @@ namespace sdds {
 			else{
 				quantity = ut.getint(1, m_ptrArr[index]->qtyNeeded(), "Quantity to add: ");
 				updateRes = (*m_ptrArr[index] += quantity);
-			   std::cout << updateRes << " items added\n\n";
+			   std::cout << updateRes << " items added!\n\n";
 			}
 			break;
 		case 2:
@@ -409,13 +403,13 @@ namespace sdds {
 				std::cout << "Quaintity on hand is zero!\n\n";
 			}
 			else{
-				quantity = ut.getint(1, m_ptrArr[index]->qty(), "Quantity to Reduce: ");
+				quantity = ut.getint(1, m_ptrArr[index]->qty(), "Quantity to reduce: ");
 				updateRes = (*m_ptrArr[index] -= quantity);
-				std::cout << updateRes << " items removed\n\n";
+				std::cout << updateRes << " items removed!\n\n";
 			}
 			break;
 		default:
-			std::cout << "Aborted!\n";
+			std::cout << "Aborted!\n\n";
 			break;
 		}
 	}
@@ -437,7 +431,7 @@ namespace sdds {
 				}
 			}
 		}
-		std::cout << "sorting is completed" << std::endl;
+		std::cout << "Sort completed!\n" << std::endl;
 	}
 
 }
