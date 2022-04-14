@@ -157,7 +157,7 @@ namespace sdds {
 				  // -10 means user entered \n as the entry for the row num//
 				  if (RowNum!=-10){
 					  m_ptrArr[RowNum-1]->linear(false);
-					  std::cout << m_ptrArr[RowNum - 1] << std::endl;
+					  std::cout<<( * m_ptrArr[RowNum - 1] )<< std::endl;
 				  }
 			  }
 			  break;
